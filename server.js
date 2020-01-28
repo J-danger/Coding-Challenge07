@@ -11,10 +11,16 @@ app.get('/ping', function (req, res) {
 });
 
 app.get('/data', function (req, res) {
-    axios.get("https://api.meetup.com/reactjs-dallas/events?&sign=true&photo-host=public&page=1")
+    axios.get('https://api.meetup.com/reactjs-dallas/events?&sign=true&photo-host=public&page=1')
     .then(data => res.status(200).send(data.data))
     .catch(err => res.send(err));
 });
+
+app.get('/rsvp', function (req, res){
+    axios.get('https://api.meetup.com/reactjs-dallas/events/qpxxkrybcdbpb/rsvps?&sign=true&photo-host=public') 
+    .then(data => res.status(200).send(data.data))  
+    .catch(err => res.send(err))
+})
 
 app.listen(PORT, function() {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
