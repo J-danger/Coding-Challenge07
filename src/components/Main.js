@@ -7,26 +7,35 @@ class Main extends Component {
       this.state = {
         error: null,
         isLoaded: false,
-        items: []
+        data: []
       };
     }
   
     componentDidMount() {
-      fetch("https://api.meetup.com/reactjs-dallas/events?&sign=true&photo-host=public&page=1", 
-      {mode: 'cors'}
-  )
-        // .then(res => res.json())
+      fetch("/data")
+        .then((data) => data.json())       
         .then(
-          result => {
-              console.log(result)
-            // this.setState({
-            //   isLoaded: true,
-            //   result: result
-            // });
-          },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
+          data => {
+              console.log(data[0])
+            this.setState({
+              isLoaded: true,
+              data: data[0],
+              created: data[0].created,
+              description: data[0].description,
+              duration: data[0].duration,
+              link: data[0].link,
+              localDate: data[0].local_date,
+              localTime: data[0].local_time,
+              membersPayFee: data[0].members_pay_fee,
+              name: data[0].name,
+              rsvpLimit: data[0].rsvp_limit,
+              status: data[0].status,
+              updated: data[0].updated,
+              visibility: data[0].visibility,
+              waitList: data[0].waitlist_count,
+              yesRSVP: data[0].yes_rsvp_count
+            });
+          },         
           (error) => {
             this.setState({
               isLoaded: true,
@@ -37,22 +46,13 @@ class Main extends Component {
     }
   
     render() {
-      const { error, isLoaded, items } = this.state;
-      if (error) {
-        return <div>Error: {error.message}</div>;
-      } else if (!isLoaded) {
-        return <div>Loading...</div>;
-      } else {
-        return (
-          <ul>
-            {items.map(item => (
-              <li key={item.name}>
-                {item.name} {item.price}
-              </li>
-            ))}
-          </ul>
-        );
-      }
+     return(
+       <>
+       <p>Created: {this.state.localTime} on {this.state.localDate}</p>
+       <p>{this.state.description}</p>
+       </>
+       
+     )
     }
   }
 
