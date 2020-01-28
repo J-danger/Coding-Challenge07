@@ -6,7 +6,9 @@ class Main extends Component {
       super(props);
       this.state = {
         error: null,
-        isLoaded: false,       
+        isLoaded: false, 
+        rsvpGuests: [],
+        waitListedGuests: []      
       };
     }
   
@@ -42,13 +44,24 @@ class Main extends Component {
           }
           )
         .then(
+
       fetch('/rsvp')
         .then((data) => data.json())
         .then(
           data => {
-            console.log(data[0])
+           for (var i in data) {
+              var response = data[i].response;                          
+              if (response === 'yes'){
+                let rsvp = this.state.rsvpGuests                
+                rsvp.push(data[i].member.name)                
+              } else {
+                let wait = this.state.waitListedGuests                
+                wait.push(data[i].member.name)
+              }
+           }
+            console.log(data)
             this.setState({
-              rsvps: Object.values(data)
+              rsvpData: Object.values(data),             
             })
           },
           (error) => {
@@ -87,11 +100,6 @@ class Main extends Component {
         yesRSVP={this.state.yesRSVP}
       />
 
-      {this.state.rsvps.map((members) => 
-      )}
-
-     
-      
        </>
        
      )
