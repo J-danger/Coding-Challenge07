@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Card from './Card'
+import RSVP from './RSVP'
+// import Test from './Test'
 
 class Main extends Component {
     constructor(props) {
@@ -18,8 +20,8 @@ class Main extends Component {
         .then(
           data => {
               console.log(data[0])
-            this.setState({
-              isLoaded: true,              
+              // save event data in state
+            this.setState({                            
               created: data[0].created,
               description: data[0].description,
               duration: data[0].duration,
@@ -49,20 +51,24 @@ class Main extends Component {
         .then((data) => data.json())
         .then(
           data => {
+            // console.log(data)
+            //iteration over the object to separate RSVP and wait list. Grabs name and photo
            for (var i in data) {
               var response = data[i].response;                          
               if (response === 'yes'){
                 let rsvp = this.state.rsvpGuests                
-                rsvp.push(data[i].member.name)                
+                rsvp.push({name: data[i].member.name, photo: data[i].member.photo})
+                this.setState({
+                  isLoaded: true
+                })                
               } else {
                 let wait = this.state.waitListedGuests                
-                wait.push(data[i].member.name)
+                wait.push({name: data[i].member.name, photo: data[i].member.photo})
+                this.setState({
+                  isLoaded: true
+                })                  
               }
-           }
-            console.log(data)
-            this.setState({
-              rsvpData: Object.values(data),             
-            })
+           }          
           },
           (error) => {
             this.setState({
@@ -79,8 +85,11 @@ class Main extends Component {
     
   
     render() {
+
+      let rsvpList = this.state.rsvpGuests
+      let waitList = this.state.waitListedGuests
      return(
-       <>
+       <>     
        {/* <p>Created: {this.state.localTime} on {this.state.localDate}</p>
        <p>{this.state.description}</p> */}
       <Card
@@ -98,7 +107,25 @@ class Main extends Component {
         visibility={this.state.visibility}
         waitList={this.state.waitList}
         yesRSVP={this.state.yesRSVP}
+        
       />
+
+      <RSVP 
+      rsvpGuests={this.state.rsvpGuests}
+      waitListedGuests={this.state.waitListedGuests}
+      />
+
+      <div className ='rsvpList'>
+        <h1>RSVP</h1>
+        {rsvpList.map(rsvp => <p>{rsvp.name}</p>)}
+      </div>
+
+      <div className ='waitList'>
+        <h1>Wait list</h1>
+        {waitList.map(wait => <p>{wait.name}</p>)}
+      </div>
+
+
 
        </>
        

@@ -18,7 +18,9 @@ function Card(props) {
                 {/* <p> {props.updated}</p> */}
                 <p>Open to: {props.visibility}</p>
                 <p>Current wait list: {props.waitList}</p> 
-                <p>RSVP: {props.yesRSVP}</p>     
+                <p>RSVP: {props.yesRSVP}</p> 
+                <p>RSVP list: {props.rsvpGuests}</p>    
+                <p>Wait list: {props.waitListedGuests}</p>  
             </div>
         
     </>
