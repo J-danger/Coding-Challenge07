@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Event from './Event'
-import RSVP from './RSVP'
+
 // import Test from './Test'
 
 class Main extends Component {
@@ -51,57 +51,19 @@ class Main extends Component {
         .then((data) => data.json())
         .then(
           data => {
-
-            
-
-           
             //iteration over the object to separate RSVP and wait list. Using .map
-            data.map((data, index) =>{  
-            
-            
-                this.setState({
-                  isLoaded: true
-                }) 
-              
-            })
-           
             let rsvp = this.state.rsvpGuests 
-            let wait = this.state.waitListedGuests               
-            if (data.response === "yes"){
-                rsvp.push({name: data.member.name, photo: data.member.photo, key: data.member.id})
-                console.log(rsvp)
+            let wait = this.state.waitListedGuests  
+            data.map((data, i) =>{  
+                if (data.response === "yes"){
+                  return rsvp.push({name: data.member.name, photo: data.member.photo, key: i}) 
+                } else {
+                  return wait.push({name: data.member.name, photo: data.member.photo, key: i}) 
+                }
                 this.setState({
                   isLoaded: true
-                })   
-            } 
-            // else {
-            //   wait.push({name: data.member.name, photo: data.member.photo, key: data.member.id})
-            //   this.setState({
-            //     isLoaded: true
-            //   })               
-            // }
-
-          //   for (var i = 0; i < data.length; i++) {
-          //     rsvp[data[i].member.name] 
-          // }
-          // this.setState(rsvp)
-          // iteration over the object to separate RSVP and wait list. Using for loop
-          //  for (var i in data) {
-          //     var response = data[i].response; 
-          //     let rsvp = this.state.rsvpGuests                
-          //     let wait = this.state.waitListedGuests                          
-          //     if (response === 'yes'){
-          //       rsvp.push({name: data[i].member.name, photo: data[i].member.photo})
-          //       this.setState({
-          //         isLoaded: true
-          //       })                
-          //     } else {   
-          //       wait.push({name: data[i].member.name, photo: data[i].member.photo})
-          //       this.setState({
-          //         isLoaded: true
-          //       })                  
-          //     }
-          //  }          
+                })
+            }) 
           },
           (error) => {
             this.setState({
@@ -109,20 +71,18 @@ class Main extends Component {
               error
             });
           }
+          
           )
-        )  
+        ) 
     }
   
     render() {
-
       let rsvpList = this.state.rsvpGuests
       let waitList = this.state.waitListedGuests
       let rsvpKey = this.state.rsvpGuests.key
       let waitKey = this.state.waitListedGuests.key
      return(
        <>     
-       {/* <p>Created: {this.state.localTime} on {this.state.localDate}</p>
-       <p>{this.state.description}</p> */}
       <Event
         created={this.state.created}
         description={this.state.description}
