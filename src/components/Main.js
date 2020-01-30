@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Event from './Event'
-
+import RSVP from './RSVP'
+import { For } from 'react-loops'
 // import Test from './Test'
 
 class Main extends Component {
@@ -54,15 +55,17 @@ class Main extends Component {
             //iteration over the object to separate RSVP and wait list. Using .map
             let rsvp = this.state.rsvpGuests 
             let wait = this.state.waitListedGuests  
-            data.map((data, i) =>{  
+            let list = data.map((data, i) =>{  
                 if (data.response === "yes"){
-                  return rsvp.push({name: data.member.name, photo: data.member.photo, key: i}) 
+                  return (
+                    rsvp.push({name: data.member.name, photo: data.member.photo, key: i})
+                    
+                    ) 
                 } else {
                   return wait.push({name: data.member.name, photo: data.member.photo, key: i}) 
                 }
-                this.setState({
-                  isLoaded: true
-                })
+                
+                
             }) 
           },
           (error) => {
@@ -77,45 +80,49 @@ class Main extends Component {
     }
   
     render() {
-      let rsvpList = this.state.rsvpGuests
-      let waitList = this.state.waitListedGuests
-      let rsvpKey = this.state.rsvpGuests.key
-      let waitKey = this.state.waitListedGuests.key
-     return(
-       <>     
-      <Event
-        created={this.state.created}
-        description={this.state.description}
-        duration={this.state.duration}
-        link={this.state.link}
-        time={this.state.localTime}
-        date={this.state.localDate}
-        membersPay={this.state.membersPayFee}
-        name={this.state.name}
-        rsvpLimit={this.state.rsvpLimit}
-        status={this.state.status}
-        updated={this.state.update}
-        visibility={this.state.visibility}
-        waitList={this.state.waitList}
-        yesRSVP={this.state.yesRSVP}
+     
+     
+       if (this.state.rsvpGuests){
+        let rsvpList = this.state.rsvpGuests
+        let waitList = this.state.waitListedGuests
+        let rsvpKey = this.state.rsvpGuests.key
+        let waitKey = this.state.waitListedGuests.key
+        return(
+          <>     
+         <Event
+           created={this.state.created}
+           description={this.state.description}
+           duration={this.state.duration}
+           link={this.state.link}
+           time={this.state.localTime}
+           date={this.state.localDate}
+           membersPay={this.state.membersPayFee}
+           name={this.state.name}
+           rsvpLimit={this.state.rsvpLimit}
+           status={this.state.status}
+           updated={this.state.update}
+           visibility={this.state.visibility}
+           waitList={this.state.waitList}
+           yesRSVP={this.state.yesRSVP}
+           
+         />
+         
+         <RSVP
+         rsvp={this.state.rsvpGuests}
+         wait={this.state.waitListedGuests}
+         />
+
         
-      />
-
-      <div className ='rsvpList'>
-        <h1>RSVP</h1>
-        {rsvpList.map(rsvp => <p key={rsvpKey}>{rsvp.name}</p>)}
-      </div>
-
-      <div className ='waitList'>
-        <h1>Wait list</h1>
-        {waitList.map(wait => <p key={waitKey}>{wait.name}</p>)}
-      </div>
-
-
-
-       </>
-       
-     )
+   
+   
+   
+          </>
+          
+        )
+      }
+ 
+      
+   
     }
   }
 
