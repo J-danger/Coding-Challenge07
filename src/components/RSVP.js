@@ -4,22 +4,33 @@ class RSVP extends Component{
   constructor(props){
     super();
     this.state = {
-      isLoaded: props.isLoaded,
-      rsvp: props.rsvp
+      isLoaded: props.isLoaded      
     }
   }
 
   render() {
     return (
-      <div>
+      <>
+      <div className='rsvp'>
         <h1> RSVP </h1>
-        {this.props.rsvp.map(rsvp =>
+        {this.props.list.rsvp.map(rsvp =>
           <div>
             {rsvp.name}
             <img src={rsvp.photo}></img>
           </div>
+          
         )}
       </div>
+      <div className='wait'>
+        <h1> Wait List </h1>
+        {this.props.list.wait.map(wait =>
+          <div>
+            {wait.name}
+            <img src={wait.photo}></img>
+          </div>
+        )}
+      </div>
+      </>
     )
   }
 }

@@ -36,7 +36,8 @@ class Main extends Component {
               updated: data[0].updated,
               visibility: data[0].visibility,
               waitList: data[0].waitlist_count,
-              yesRSVP: data[0].yes_rsvp_count
+              yesRSVP: data[0].yes_rsvp_count,
+              isLoaded: true
             });
           },         
           (error) => {
@@ -62,7 +63,9 @@ class Main extends Component {
                 }
             })  
             this.setState({
-              rsvp : data
+              data: data,
+              wait: wait,
+              isLoaded: true,
             });
 
           },
@@ -77,74 +80,6 @@ class Main extends Component {
         ) 
     }
 
-    // data() {
-    //    fetch('/data')
-    //     .then((data) => data.json())       
-    //     .then(
-    //       data => {
-    //           console.log(data[0])
-    //           // save event data in state
-    //         this.setState({                            
-    //           created: data[0].created,
-    //           description: data[0].description,
-    //           duration: data[0].duration,
-    //           link: data[0].link,
-    //           localDate: data[0].local_date,
-    //           localTime: data[0].local_time,
-    //           membersPayFee: data[0].members_pay_fee,
-    //           name: data[0].name,
-    //           rsvpLimit: data[0].rsvp_limit,
-    //           status: data[0].status,
-    //           updated: data[0].updated,
-    //           visibility: data[0].visibility,
-    //           waitList: data[0].waitlist_count,
-    //           yesRSVP: data[0].yes_rsvp_count
-    //         });
-    //       },         
-    //       (error) => {
-    //         this.setState({
-    //           isLoaded: true,
-    //           error
-    //         });
-    //       }
-    //       )
-    // }
-
-    // rsvp()  {
-    //    fetch('/rsvp')
-    //     .then((data) => data.json())
-    //     .then(
-    //       data => {
-    //         //iteration over the object to separate RSVP and wait list. Using .map
-    //         let rsvp = this.state.rsvpGuests 
-    //         let wait = this.state.waitListedGuests  
-    //           data.map((data, i) =>{  
-    //             if (data.response === "yes"){
-    //               return (
-    //                 rsvp.push({name: data.member.name, photo: data.member.photo, key: i})
-                    
-    //                 ) 
-    //             } else {
-    //               return wait.push({name: data.member.name, photo: data.member.photo, key: i}) 
-    //             }
-                
-                
-    //         }) 
-    //       },
-    //       (error) => {
-    //         this.setState({
-    //           isLoaded: true,
-    //           error
-    //         });
-    //       }
-          
-    //       )
-        
-    // }
-
-
-    
-  
     render() {
      
        if (this.state.rsvpGuests){
@@ -171,33 +106,13 @@ class Main extends Component {
               yesRSVP={this.state.yesRSVP}
               
             />
-            
             <RSVP
-            rsvp={rsvpList}
+            list={{rsvp: rsvpList, wait: waitList}}
             isLoaded={this.state.isLoaded}
             />
-
         </>
-          
         )
       }
- 
-      
-   
     }
   }
-
-  // class RSVP extends Component {
-  //   render() {
-  //     const {rsvp, wait} = this.props
-  //     console.log(rsvp)
-  
-  //     return (
-  //       <div >
-         
-  //       </div>
-  //     )
-  //   }
-  // }
-
   export default Main;
