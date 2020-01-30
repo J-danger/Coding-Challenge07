@@ -63,9 +63,8 @@ class Main extends Component {
                 }
             })  
             this.setState({
-              data: data,
-              wait: wait,
-              isLoaded: true,
+              data: data,              
+              isLoaded: true
             });
 
           },
@@ -85,10 +84,11 @@ class Main extends Component {
        if (this.state.rsvpGuests){
         const rsvpList = this.state.rsvpGuests
         const waitList = this.state.waitListedGuests
-        const rsvpKey = this.state.rsvpGuests.key
-        const waitKey = this.state.waitListedGuests.key
+        // const rsvpKey = this.state.rsvpGuests.key
+        // const waitKey = this.state.waitListedGuests.key
         return(
-          <>     
+          <> 
+          <div className='event'>  
             <Event
               created={this.state.created}
               description={this.state.description}
@@ -104,13 +104,17 @@ class Main extends Component {
               visibility={this.state.visibility}
               waitList={this.state.waitList}
               yesRSVP={this.state.yesRSVP}
-              
             />
+          </div>  
             <RSVP
             list={{rsvp: rsvpList, wait: waitList}}
             isLoaded={this.state.isLoaded}
             />
         </>
+        )
+      } else {
+        return(
+          <p>Loading...</p>
         )
       }
     }

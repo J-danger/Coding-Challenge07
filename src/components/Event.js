@@ -5,11 +5,11 @@ function Event(props) {
   return (
     <>
       <div className="card">
-          <p>Event: {props.name}</p>
+          <h1>Event: {props.name}</h1>
           <p>Announced: {props.created} </p>
           {/* {props.description} */}
-          <p>Duration: {props.duration}</p>
-          <p>{props.link}</p>        
+          <p>Duration: {props.duration}</p>        
+          <a href={props.link}>Event Link</a>        
           <p>At {props.time} on {props.date}</p>                
           {/* <p>{props.membersPay}</p> */}
           <p>RSVP: {props.yesRSVP}/{props.rsvpLimit}</p>
