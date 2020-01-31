@@ -6,9 +6,9 @@ import moment from 'moment'
 
 // import Test from './Test'
 
-class Main extends Component {
-    constructor(props) {
-      super(props);
+class Test extends Component {
+    constructor() {
+      super();
       this.state = {
         error: null,
         isLoaded: false, 
@@ -16,9 +16,10 @@ class Main extends Component {
         waitListedGuests: []      
       };
     }
-  
-    async componentDidMount() {
-      await fetch('/data')
+
+    getData(){
+      setTimeout(() => {
+         fetch('/data')
         .then((data) => data.json())       
         .then(
           data => {
@@ -29,8 +30,7 @@ class Main extends Component {
               description: data[0].description,
               duration: data[0].duration,
               link: data[0].link,
-              localDate: data[0].local_date,
-              localTime: data[0].local_time,
+              time: data[0].time,
               membersPayFee: data[0].members_pay_fee,
               name: data[0].name,
               rsvpLimit: data[0].rsvp_limit,
@@ -54,36 +54,40 @@ class Main extends Component {
             });
           }
           )
-        .then(
-      await fetch('/rsvp')
-        .then((data) => data.json())
-        .then(
-          data => {
-            //iteration over the object to separate RSVP and wait list. Using .map
-            let rsvp = this.state.rsvpGuests 
-            let wait = this.state.waitListedGuests  
-              data.map((data, i) =>{  
-                if (data.response === "yes"){
-                  return rsvp.push({name: data.member.name, photo: data.member.photo, key: i})
-                } else {
-                  return wait.push({name: data.member.name, photo: data.member.photo, key: i}) 
+          .then(
+             fetch('/rsvp')
+              .then((data) => data.json())
+              .then(
+                data => {
+                  //iteration over the object to separate RSVP and wait list. Using .map
+                  let rsvp = this.state.rsvpGuests 
+                  let wait = this.state.waitListedGuests  
+                    data.map((data, i) =>{  
+                      if (data.response === "yes"){
+                        return rsvp.push({name: data.member.name, photo: data.member.photo, key: i})
+                      } else {
+                        return wait.push({name: data.member.name, photo: data.member.photo, key: i}) 
+                      }
+                  })  
+                  this.setState({
+                    isLoaded: true,
+                  });
+      
+                },
+                (error) => {
+                  this.setState({
+                    isLoaded: true,
+                    error
+                  });
                 }
-            })  
-            this.setState({
-              data: data,              
-              isLoaded: true,
-              
-            });
+              )
+            ) 
+      }, 1000)
+    }
 
-          },
-          (error) => {
-            this.setState({
-              isLoaded: true,
-              error
-            });
-          }
-        )
-      ) 
+    
+    componentDidMount() {
+        this.getData()
     }
 
     render() {
@@ -91,17 +95,25 @@ class Main extends Component {
        if (this.state.rsvpGuests){
         const rsvpList = this.state.rsvpGuests
         const waitList = this.state.waitListedGuests
-       
+        const timeStamp = this.state.time
+        // console.log(rsvpList)
         
         // created Epoch conversion 
         var createdDate = new Date(this.state.created);
         var dateString = createdDate.toDateString()	
+
+        // time (start) Epoch conversion 
+        var formattedStartDate = new Date(timeStamp);
+        var startDate = formattedStartDate.toDateString()
+        
+        var startTime = new Date(timeStamp).toLocaleTimeString("en-US")
+       
         
         // duration epoch conversion
-        var dateDur = new Date(this.state.duration * 1000);
-        var hoursDur  = dateDur.getHours();
-        var minutesDur  = "0" + dateDur.getMinutes();
-        var secondsDur  = "0" + dateDur.getSeconds();
+        var duration = new Date(this.state.duration * 1000);
+        var hoursDur  = duration.getHours();
+        var minutesDur  = "0" + duration.getMinutes();
+        var secondsDur  = "0" + duration.getSeconds();
         var formattedTimeDur = hoursDur + ' hours'
 
         //    // created Epoch conversion 
@@ -116,8 +128,8 @@ class Main extends Component {
               description={this.state.description}
               duration={formattedTimeDur}
               link={this.state.link}
-              timeStart={this.state.localTime}
-              dateStart={this.state.localDate}
+              startDate={startDate}
+              startTime={startTime}
               membersPay={this.state.membersPayFee}
               name={this.state.name}
               rsvpLimit={this.state.rsvpLimit}
@@ -131,6 +143,7 @@ class Main extends Component {
             <RSVP
             list={{rsvp: rsvpList, wait: waitList}}
             isLoaded={this.state.isLoaded}
+            key={rsvpList.key}
             />
         </>
         )
@@ -141,4 +154,4 @@ class Main extends Component {
       }
     }
   }
-  export default Main;
+  export default Test;

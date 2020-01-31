@@ -7,12 +7,20 @@ class Event extends Component {
   constructor(props){
     super();
     this.state = {
-      isLoaded: props.isLoaded      
+      isLoaded: props.isLoaded,
+      time: props.timeStart      
     }
   }
+
+
   
   render(){
-  
+    // console.log(this.props.timeStart)
+    if(this.props.timeStart === 0) return null
+    else {
+    // const event = (this.props.dateStart);
+
+    
     return (
       <>
         <div className="card">
@@ -22,7 +30,8 @@ class Event extends Component {
             <p>Duration: {this.props.duration}</p>        
             <a href={this.props.link}>Event Link</a> 
             {/* <Moment add={{ hours: 6 }}>{this.props.timeStart}</Moment>   */}
-            <p>Date: <Moment local parse="Do MMM YYYY hh:mm">{this.props.dateStart}{this.props.timeStart}</Moment> </p>
+            <p>Date: {this.props.startDate}</p>
+            <p>Time: {this.props.startTime}</p>
            
             {/* <p>Event starts at {this.props.timeStart} on {this.props.dateStart}</p>                 */}
             {/* <p>{this.props.membersPay}</p> */}
@@ -37,6 +46,7 @@ class Event extends Component {
           
       </>
     )
+  }
   }
 }
  

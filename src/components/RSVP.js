@@ -3,14 +3,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class RSVP extends Component{
   constructor(props){
-    super();
+    super(props);
     this.state = {
       isLoaded: props.isLoaded      
     }
   }
 
   render() {
-
+ 
+    // let rsvpKey = this.props.list.rsvp.key
+    // let waitKey = this.props.list.wait.key
+    // console.log(waitKey)
+      
+    
     return (
       <div className="lists">
         <div className='rsvp'>
