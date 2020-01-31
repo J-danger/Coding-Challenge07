@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Event from './Event'
 import RSVP from './RSVP'
+import moment from 'moment'
+
 
 // import Test from './Test'
 
@@ -37,7 +39,12 @@ class Main extends Component {
               visibility: data[0].visibility,
               waitList: data[0].waitlist_count,
               yesRSVP: data[0].yes_rsvp_count,
-              isLoaded: true
+              isLoaded: true,
+              address: data[0].venue.address_1,
+              country: data[0].venue.city,
+              state: data[0].venue.state,
+              zip: data[0].venue.zip,
+              
             });
           },         
           (error) => {
@@ -64,7 +71,8 @@ class Main extends Component {
             })  
             this.setState({
               data: data,              
-              isLoaded: true
+              isLoaded: true,
+              
             });
 
           },
@@ -74,9 +82,8 @@ class Main extends Component {
               error
             });
           }
-          
-          )
-        ) 
+        )
+      ) 
     }
 
     render() {
@@ -84,18 +91,33 @@ class Main extends Component {
        if (this.state.rsvpGuests){
         const rsvpList = this.state.rsvpGuests
         const waitList = this.state.waitListedGuests
-        // const rsvpKey = this.state.rsvpGuests.key
-        // const waitKey = this.state.waitListedGuests.key
+       
+        
+        // created Epoch conversion 
+        var createdDate = new Date(this.state.created);
+        var dateString = createdDate.toDateString()	
+        
+        // duration epoch conversion
+        var dateDur = new Date(this.state.duration * 1000);
+        var hoursDur  = dateDur.getHours();
+        var minutesDur  = "0" + dateDur.getMinutes();
+        var secondsDur  = "0" + dateDur.getSeconds();
+        var formattedTimeDur = hoursDur + ' hours'
+
+        //    // created Epoch conversion 
+        // var createdDate = new Date(this.state.created);
+        // var dateString = createdDate.toDateString()	
         return(
           <> 
-          <div className='event'>  
+          <div className='event'> 
+         
             <Event
-              created={this.state.created}
+              created={dateString}
               description={this.state.description}
-              duration={this.state.duration}
+              duration={formattedTimeDur}
               link={this.state.link}
-              time={this.state.localTime}
-              date={this.state.localDate}
+              timeStart={this.state.localTime}
+              dateStart={this.state.localDate}
               membersPay={this.state.membersPayFee}
               name={this.state.name}
               rsvpLimit={this.state.rsvpLimit}
