@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import Event from './Event'
 import RSVP from './RSVP'
-import moment from 'moment'
 
 
 // import Test from './Test'
 
-class Test extends Component {
+class Main extends Component {
     constructor() {
       super();
       this.state = {
@@ -23,7 +22,7 @@ class Test extends Component {
         .then((data) => data.json())       
         .then(
           data => {
-              console.log(data[0])
+              
               // save event data in state
             this.setState({                            
               created: data[0].created,
@@ -61,7 +60,8 @@ class Test extends Component {
                 data => {
                   //iteration over the object to separate RSVP and wait list. Using .map
                   let rsvp = this.state.rsvpGuests 
-                  let wait = this.state.waitListedGuests  
+                  let wait = this.state.waitListedGuests
+                    
                     data.map((data, i) =>{  
                       if (data.response === "yes"){
                         return rsvp.push({name: data.member.name, photo: data.member.photo, key: i})
@@ -112,13 +112,8 @@ class Test extends Component {
         // duration epoch conversion
         var duration = new Date(this.state.duration * 1000);
         var hoursDur  = duration.getHours();
-        var minutesDur  = "0" + duration.getMinutes();
-        var secondsDur  = "0" + duration.getSeconds();
         var formattedTimeDur = hoursDur + ' hours'
 
-        //    // created Epoch conversion 
-        // var createdDate = new Date(this.state.created);
-        // var dateString = createdDate.toDateString()	
         return(
           <> 
           <div className='event'> 
@@ -154,4 +149,4 @@ class Test extends Component {
       }
     }
   }
-  export default Test;
+  export default Main;

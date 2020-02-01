@@ -40,22 +40,35 @@
 .rsvp {
   width: 300px;
   float: left;
+  margin-right: 5px;
 }
 
 .wait {
   width: 300px;
   float: left;
+  margin-left: 5px
 }
 
 .lists {
   display: inline-block;
-  width: 600px
+  width: 610px
 }
 
+li.list-group-item {
+  margin-bottom: 10px;
+}
+
+li.list-group-item:hover{
+background: rgba(6, 6, 68, 0.315)
+
+}
 .event {
-  width: 600px;
-  float: left;
-  margin: 20px 0px 0px 20px;
+  width: 80%;
+  /* float: left; */
+  margin: 20px 0px 50px 20px;
+  display: inline-block;
+  /* box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); */
+  
 }
 
 
