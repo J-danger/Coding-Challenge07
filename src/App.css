@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   font-family: 'Roboto', sans-serif;
+  background: #1b262c
 }
 
 .App-logo {
@@ -38,6 +39,10 @@
   }
 }
 
+.loading{
+  background: white;
+}
+
 .rsvp {
   width: 300px;
   float: left;
@@ -55,15 +60,19 @@
   width: 612px;
   margin-top: 50px;
 }
-
+.list-heading{
+  margin-bottom: 20px;
+  color: whitesmoke
+}
 li.list-group-item {
   margin-bottom: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 20px;
 }
 
 li.list-group-item:hover{
-background: rgba(6, 6, 68, 0.315);
-font-size: 20px;
+background: #3282b8;
+font-size: 25px;
 }
 
 .event-wrapper {
@@ -76,7 +85,7 @@ font-size: 20px;
 }
 
 .card {
-  margin: 50px 0px 50px 0px;
+  margin: 50px 0px 10px 0px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   padding: 10px;
   

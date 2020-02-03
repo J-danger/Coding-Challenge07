@@ -38,7 +38,8 @@ class Main extends Component {
               yesRSVP: data[0].yes_rsvp_count,
               address: data[0].venue.address_1,
               city: data[0].venue.city,
-              state: data[0].venue.state, 
+              state: data[0].venue.state
+              
               
             });
           },         
@@ -87,34 +88,36 @@ class Main extends Component {
     }
 
     render() {
-     
-       if (this.state.isLoaded === true){
+
+      
+      if (this.state.isLoaded === true){
         const rsvpList = this.state.rsvpGuests
         const waitList = this.state.waitListedGuests
         const timeStamp = this.state.time
+        const eventLength = this.state.time + this.state.duration
         
-
+        
         // time (start) Epoch conversion 
         let formattedStartDate = new Date(timeStamp);
         let startDate = formattedStartDate.toDateString()
         let startTime = new Date(timeStamp).toLocaleTimeString("en-US")
-       
+
+        // time (start) Epoch conversion 
+        let endTime = new Date(eventLength).toLocaleTimeString("en-US")
         
-        // duration epoch conversion
-        let duration = new Date(this.state.duration * 1000);
-        let hoursDur  = duration.getHours();
-        let formattedTimeDur = hoursDur + ' hours'
+         
+    
 
         return(
-          <> 
-          
+
+          <>           
           <div className='event'> 
          
             <Event
-              duration={formattedTimeDur}
               link={this.state.link}
               startDate={startDate}
               startTime={startTime}
+              endTime={endTime}
               name={this.state.name}
               status={this.state.status}
               waitList={this.state.waitList}
@@ -133,6 +136,7 @@ class Main extends Component {
             key={rsvpList.key}
             />
         </>
+
         )
       } else {
         return(

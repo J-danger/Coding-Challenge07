@@ -17,17 +17,15 @@ class Event extends Component {
       <div className="event-wrapper">
         <div className="card">
           <div className="react-container">
-          <span className="react-logo">
-                <span className="nucleo"></span>
-          </span>
-
+            <span className="react-logo">
+                  <span className="nucleo"></span>
+            </span>
           </div>
           <div className="event-info">
             <h1>{this.props.name}</h1>
-            <h3>{this.props.startTime} - {this.props.startDate} </h3>
-            <h3>Duration: {this.props.duration}</h3> 
+            <h3>{this.props.startDate}</h3>
+            <h3>{this.props.startTime} - {this.props.endTime}  </h3>
             <a href={this.props.link} target="_blank" rel="noopener noreferrer"><button className="rsvpLink">RSVP!</button></a>
-         
           </div>
           
       <div className="map">
