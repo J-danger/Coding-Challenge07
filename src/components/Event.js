@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
  
 class Event extends Component {
   constructor(props){
@@ -11,31 +10,35 @@ class Event extends Component {
     }
   }
 
-
-  
   render(){
-
-    if(this.props.timeStart === 0) return <p>Loading...</p>
-    else {
     return (
+
       <>
+      <div className="event-wrapper">
         <div className="card">
-            <h1>Event: {this.props.name}</h1>
-            <p>Announced: {this.props.created} </p>
-            <p>Duration: {this.props.duration}</p>        
-            <a href={this.props.link}>Event Link</a> 
-            <p>Date: {this.props.startDate}</p>
-            <p>Time: {this.props.startTime}</p>
-            <p>RSVP: {this.props.yesRSVP}/{this.props.rsvpLimit}</p>
-            <p>Current wait list: {this.props.waitList}</p> 
-            <p>Status: {this.props.status}</p>
-            <p>Open to: {this.props.visibility}</p>
+          <div className="react-container">
+          <span className="react-logo">
+                <span className="nucleo"></span>
+          </span>
+
+          </div>
+          <div className="event-info">
+            <h1>{this.props.name}</h1>
+            <h3>{this.props.startTime} - {this.props.startDate} </h3>
+            <h3>Duration: {this.props.duration}</h3> 
+            <a href={this.props.link} target="_blank" rel="noopener noreferrer"><button className="rsvpLink">RSVP!</button></a>
+         
+          </div>
           
+      <div className="map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3354.3990755801688!2d-96.79267858428209!3d32.781676180970564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e98e06e1af689%3A0x1a2dfeb664f02ce5!2s2200%20Commerce%20St%2C%20Dallas%2C%20TX%2075201!5e0!3m2!1sen!2sus!4v1580698394811!5m2!1sen!2sus" title="map" width="400" height="400" frameBorder="0" allowFullScreen=""></iframe>
+          </div>
         </div>
-          
+      </div>
       </>
+
     )
-  }
+ 
   }
 }
  

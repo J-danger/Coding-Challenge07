@@ -3,8 +3,6 @@ import Event from './Event'
 import RSVP from './RSVP'
 
 
-// import Test from './Test'
-
 class Main extends Component {
     constructor() {
       super();
@@ -38,11 +36,9 @@ class Main extends Component {
               visibility: data[0].visibility,
               waitList: data[0].waitlist_count,
               yesRSVP: data[0].yes_rsvp_count,
-              isLoaded: true,
               address: data[0].venue.address_1,
-              country: data[0].venue.city,
-              state: data[0].venue.state,
-              zip: data[0].venue.zip,
+              city: data[0].venue.city,
+              state: data[0].venue.state, 
               
             });
           },         
@@ -96,55 +92,51 @@ class Main extends Component {
         const rsvpList = this.state.rsvpGuests
         const waitList = this.state.waitListedGuests
         const timeStamp = this.state.time
-        // console.log(rsvpList)
         
-        // created Epoch conversion 
-        var createdDate = new Date(this.state.created);
-        var dateString = createdDate.toDateString()	
 
         // time (start) Epoch conversion 
-        var formattedStartDate = new Date(timeStamp);
-        var startDate = formattedStartDate.toDateString()
-        
-        var startTime = new Date(timeStamp).toLocaleTimeString("en-US")
+        let formattedStartDate = new Date(timeStamp);
+        let startDate = formattedStartDate.toDateString()
+        let startTime = new Date(timeStamp).toLocaleTimeString("en-US")
        
         
         // duration epoch conversion
-        var duration = new Date(this.state.duration * 1000);
-        var hoursDur  = duration.getHours();
-        var formattedTimeDur = hoursDur + ' hours'
+        let duration = new Date(this.state.duration * 1000);
+        let hoursDur  = duration.getHours();
+        let formattedTimeDur = hoursDur + ' hours'
 
         return(
           <> 
+          
           <div className='event'> 
          
             <Event
-              created={dateString}
-              description={this.state.description}
               duration={formattedTimeDur}
               link={this.state.link}
               startDate={startDate}
               startTime={startTime}
-              membersPay={this.state.membersPayFee}
               name={this.state.name}
-              rsvpLimit={this.state.rsvpLimit}
               status={this.state.status}
-              updated={this.state.update}
-              visibility={this.state.visibility}
               waitList={this.state.waitList}
               yesRSVP={this.state.yesRSVP}
+              address={this.state.address}
+              city={this.state.city}
+              state={this.state.state}
             />
           </div>  
             <RSVP
             list={{rsvp: rsvpList, wait: waitList}}
             isLoaded={this.state.isLoaded}
+            waitList={this.state.waitList}
+            yesRSVP={this.state.yesRSVP}
+            rsvpLimit={this.state.rsvpLimit}
             key={rsvpList.key}
             />
         </>
         )
       } else {
         return(
-          <p>Loading...</p>
+          <h1 className="loading">Loading...</h1>
         )
       }
     }

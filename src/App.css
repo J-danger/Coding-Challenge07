@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 .App-logo {
@@ -51,24 +52,190 @@
 
 .lists {
   display: inline-block;
-  width: 610px
+  width: 612px;
+  margin-top: 50px;
 }
 
 li.list-group-item {
   margin-bottom: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 li.list-group-item:hover{
-background: rgba(6, 6, 68, 0.315)
-
+background: rgba(6, 6, 68, 0.315);
+font-size: 20px;
 }
-.event {
-  width: 80%;
+
+.event-wrapper {
+  width: 60%;
+  
   /* float: left; */
-  margin: 20px 0px 50px 20px;
+  /* float: left; */
+  
   display: inline-block;
-  /* box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75); */
+}
+
+.card {
+  margin: 50px 0px 50px 0px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 10px;
   
 }
+
+
+.map {
+  float: left;
+  margin: 20px 20px 0px 0px;
+  position: flex;
+}
+
+.loading {
+  margin-top: 25%;
+}
+
+.event-info {
+  border-bottom: 2px solid rgb(213,213,213)
+}
+
+
+@media only screen and (max-width: 1300px){ 
+  .event-wrapper  {       
+      /* float: none; */
+      width: 60%;
+  }
+  }
+
+@media only screen and (max-width: 950px){ 
+  .event-wrapper  {       
+      /* float: none; */
+      width: 80%;
+  }
+  }
+
+  @media only screen and (max-width: 500px){ 
+    .event-wrapper  {       
+        /* float: none; */
+        width: 80%;
+        font-size: 25px
+    }
+    }
+
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
+  z-index: 100;
+}
+
+.rsvpNumbers {
+  /* position: absolute; */
+  
+  text-align: none;
+  color: blue;
+}
+
+
+button.btn.btn-info {
+  width: 200px;
+  display:
+}
+
+button.rsvpLink {
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 7px;
+  border: 0.5px solid gray;
+  margin: 10px 0 25px 0;
+}
+
+
+button.rsvpLink:hover {
+  background: rgb(0,216,255);
+}
+
+
+
+
+body{
+  font-family: 'Roboto', sans-serif;
+}
+  .react-container{
+    width:220;
+    height:220px;
+    float: right;
+    /* background:#222;  */
+    display:flex;
+    /* margin:70px auto 0 auto; */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .react-logo{
+    display: inline-block; 
+    border-radius:50%;
+    border:10px solid #00d8ff;
+
+    animation-name:rotate;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+  }
+
+  .react-logo , .react-logo:before , .react-logo:after{
+    position:absolute;
+    display: inline-block;
+    width:200px;
+    height:70px;
+    border-radius:50%;
+    border:10px solid #00d8ff;
+  }
+
+  .nucleo , .react-logo , .react-logo:before , .react-logo:after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nucleo{
+    width:40px;
+    height:40px;
+    border-radius:100%;
+    background:#00d8ff;
+  }
+
+  .react-logo:before , .react-logo:after{
+    content:"";
+  }
+
+  .react-logo:after{
+    transform:rotate(-57deg);
+  }
+
+  .react-logo:before{
+    transform:rotate(57deg);
+  }
+  
+.title{
+  font-size:60px;
+  background:#222;
+  color:#00d8ff;
+  width:250px;
+  margin:2px auto;
+  text-align:center;
+}
+
+  @keyframes rotate{
+
+    100%{
+      transform:rotate(360deg);
+    }
+  }
 
 
