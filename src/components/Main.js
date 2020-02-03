@@ -92,7 +92,7 @@ class Main extends Component {
 
     render() {
      
-       if (this.state.rsvpGuests){
+       if (this.state.isLoaded === true){
         const rsvpList = this.state.rsvpGuests
         const waitList = this.state.waitListedGuests
         const timeStamp = this.state.time

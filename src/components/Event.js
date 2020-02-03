@@ -14,12 +14,9 @@ class Event extends Component {
 
   
   render(){
-    // console.log(this.props.timeStart)
-    if(this.props.timeStart === 0) return null
-    else {
-    // const event = (this.props.dateStart);
 
-    
+    if(this.props.timeStart === 0) return <p>Loading...</p>
+    else {
     return (
       <>
         <div className="card">
