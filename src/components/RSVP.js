@@ -21,7 +21,7 @@ class RSVP extends Component{
           )}
         </div>
         <div className='wait'>
-          <h3 className="list-heading"> Wait list ({this.props.waitList}) </h3>
+          <h3 className="list-heading"> RSVP ({this.props.waitList}) </h3>
           {this.props.list.wait.map(wait =>
             <ul className= "list-group">
               <li className="list-group-item" key={wait.key}>{wait.name}</li>

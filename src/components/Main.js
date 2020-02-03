@@ -38,9 +38,7 @@ class Main extends Component {
               yesRSVP: data[0].yes_rsvp_count,
               address: data[0].venue.address_1,
               city: data[0].venue.city,
-              state: data[0].venue.state
-              
-              
+              state: data[0].venue.state              
             });
           },         
           (error) => {
@@ -104,15 +102,11 @@ class Main extends Component {
 
         // time (start) Epoch conversion 
         let endTime = new Date(eventLength).toLocaleTimeString("en-US")
-        
-         
-    
 
         return(
 
           <>           
           <div className='event'> 
-         
             <Event
               link={this.state.link}
               startDate={startDate}
@@ -125,6 +119,7 @@ class Main extends Component {
               address={this.state.address}
               city={this.state.city}
               state={this.state.state}
+              description={this.state.description}
             />
           </div>  
             <RSVP
