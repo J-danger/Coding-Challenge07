@@ -46,18 +46,17 @@
 .rsvp {
   width: 300px;
   float: left;
-  margin-right: 5px;
+  margin-right: 100px;
 }
 
 .wait {
   width: 300px;
   float: left;
-  margin-left: 5px
 }
 
 .lists {
   display: inline-block;
-  width: 612px;
+  width: 700px;
   margin-top: 50px;
 }
 .list-heading{
@@ -75,12 +74,20 @@ background: #3282b8;
 font-size: 25px;
 }
 
+@media only screen and (max-width: 1200px){ 
+  .lists  {       
+      /* float: none; */
+      width: 620px;
+  }
+  .rsvp {
+    width: 300px;
+    float: left;
+    margin-right: 20px;
+  }
+  }
+
 .event-wrapper {
   width: 60%;
-  
-  /* float: left; */
-  /* float: left; */
-  
   display: inline-block;
 }
 
@@ -121,13 +128,13 @@ font-size: 25px;
   }
   }
 
-  @media only screen and (max-width: 500px){ 
-    .event-wrapper  {       
-        /* float: none; */
-        width: 80%;
-        font-size: 25px
-    }
-    }
+@media only screen and (max-width: 500px){ 
+  .event-wrapper  {       
+      /* float: none; */
+      width: 80%;
+      font-size: 25px
+  }
+  }
 
 
 body::before {
